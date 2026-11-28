@@ -1,0 +1,81 @@
+<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>A lighter neutral ribbon palette</title><style>
+body { font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 2rem auto;
+       max-width: 1500px; padding: 0 1.5rem; color: #1d1d1f; background: #fafafa; }
+h1 { font-size: 1.6rem; margin-bottom: .3rem; }
+.intro { color: #444; margin-bottom: 1rem; }
+.hint { color: #555; font-size: .92rem; margin-bottom: 1.6rem; }
+.hint b { color: #c00; }
+section { background: #fff; border: 1px solid #ddd; border-radius: 10px; padding: 1.2rem 1.4rem;
+          margin-bottom: 2rem; }
+h2 { font-size: 1.25rem; margin: 0 0 .4rem; }
+h2 a { color: inherit; }
+p { margin: .3rem 0; }
+.label { font-weight: 600; }
+.grid { display: grid; gap: 1.2rem; margin-top: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+.seq { display: flex; align-items: center; justify-content: center; gap: 2rem; margin-top: 1rem; }
+.seq figure { flex: 0 1 auto; min-width: 0; }  /* sized to the picture, so the centre arrow sits midway */
+.seq .arrow { flex: 0 0 auto; font-size: 54px; line-height: 1; color: #d00; font-weight: 700; }
+.seq.stack { flex-direction: column; align-items: stretch; gap: 0.6rem; }
+.seq.stack figure { width: 100%; }
+.seq.stack .arrow { transform: rotate(90deg); align-self: center; }
+@media (max-width: 900px) { .seq { flex-direction: column; align-items: stretch; }
+                            .seq .arrow { transform: rotate(90deg); align-self: center; } }
+figure { margin: 0; }
+figcaption { font-weight: 600; margin-bottom: .35rem; }
+.shot { position: relative; display: block; width: fit-content; max-width: 100%; cursor: zoom-in; }
+.shot img { display: block; box-sizing: border-box; max-width: 100%; height: auto;
+            border: 1px solid #bbb; background: #fff; }
+.hl { position: absolute; box-sizing: border-box; border: 3px solid #e00000; border-radius: 4px;
+      box-shadow: 0 0 0 2px rgba(255,255,255,.85); pointer-events: none; }
+.hl::before { content: ''; position: absolute; left: -36px; top: -36px; width: 32px; height: 32px;
+              background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><path d='M5 5 L31 31 M31 31 L31 15 M31 31 L15 31' stroke='%23e00000' stroke-width='5' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>") no-repeat center / contain; }
+.hl.up::before, .hl.sw::before { top: auto; bottom: -36px; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><path d='M5 35 L31 9 M31 9 L15 9 M31 9 L31 25' stroke='%23e00000' stroke-width='5' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>"); }
+.hl.ne::before { left: auto; right: -36px; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><path d='M35 5 L9 31 M9 31 L9 15 M9 31 L25 31' stroke='%23e00000' stroke-width='5' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>"); }
+.hl.se::before { top: auto; bottom: -36px; left: auto; right: -36px; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><path d='M35 35 L9 9 M9 9 L25 9 M9 9 L9 25' stroke='%23e00000' stroke-width='5' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>"); }
+.hl.noarrow::before { display: none; }
+#lb { display: none; position: fixed; inset: 0; background: rgba(12,12,16,.93); z-index: 1000; }
+#lb.on { display: flex; flex-direction: column; }
+#lb .stage { flex: 1; overflow: auto; display: flex; align-items: center; justify-content: center;
+             padding: 48px 56px 8px; }
+#lb .shot { cursor: zoom-in; max-width: none; margin: auto; }
+#lb .shot img { max-width: calc(100vw - 112px); max-height: calc(100vh - 110px); width: auto;
+                height: auto; border-color: #444; }
+#lb .shot.actual { cursor: zoom-out; }
+#lb .shot.actual img { max-width: none; max-height: none; }
+#lb .cap { color: #fff; text-align: center; padding: 8px 16px 16px; font-size: 15px; }
+#lb button { position: absolute; background: rgba(255,255,255,.12); color: #fff; border: 0;
+             border-radius: 8px; font-size: 30px; line-height: 1; cursor: pointer; padding: 6px 14px; }
+#lb button:hover { background: rgba(255,255,255,.25); }
+#lb .close { top: 10px; right: 14px; }
+#lb .prev { left: 10px; top: 50%; transform: translateY(-50%); }
+#lb .next { right: 10px; top: 50%; transform: translateY(-50%); }
+</style></head><body><main><h1>A lighter neutral ribbon palette</h1><p class="intro">An illustration made by mapping the background greys of our own synthetic WordCraft render; not a build of a new theme. Open any picture, then press ← and → to flip between before and after.</p><p class="hint">Click any picture to open it large; <b>Esc</b> or a click outside closes it, the arrow keys move between pictures, and clicking the large picture shows its actual size. Red boxes mark what changed, with nearby changes grouped; an arrow points to the change when it is small in a big screenshot.</p><section id="item-1"><h2>Current and suggested light-theme values</h2><div class="seq stack"><figure><figcaption>Before (current light values)</figcaption><div class="shot" data-caption="Before (current light values)"><img src="01-main.png" alt="Before (current light values)"></div></figure><div class="arrow" aria-hidden="true">&rarr;</div><figure><figcaption>After (suggested values, illustration)</figcaption><div class="shot" data-caption="After (suggested values, illustration)"><img src="01-this-pr.png" alt="After (suggested values, illustration)"></div></figure></div></section></main><div id="lb"><div class="stage"></div><div class="cap"></div><button class="close" title="Close (Esc)">&times;</button><button class="prev" title="Previous (left arrow)">&lsaquo;</button><button class="next" title="Next (right arrow)">&rsaquo;</button></div><script>
+(function () {
+  var shots = Array.prototype.slice.call(document.querySelectorAll('main .shot'));
+  var lb = document.getElementById('lb'), stage = lb.querySelector('.stage'), cap = lb.querySelector('.cap');
+  var cur = -1;
+  function open(i) {
+    cur = (i + shots.length) % shots.length;
+    var c = shots[cur].cloneNode(true);
+    stage.innerHTML = ''; stage.appendChild(c);
+    c.addEventListener('click', function (e) { c.classList.toggle('actual'); e.stopPropagation(); });
+    cap.textContent = shots[cur].getAttribute('data-caption') + '   (' + (cur + 1) + ' / ' + shots.length + ')';
+    lb.classList.add('on'); document.body.style.overflow = 'hidden';
+  }
+  function close() { lb.classList.remove('on'); document.body.style.overflow = ''; stage.innerHTML = ''; cur = -1; }
+  shots.forEach(function (s, i) { s.addEventListener('click', function () { open(i); }); });
+  lb.addEventListener('click', function (e) { if (e.target === lb || e.target === stage) close(); });
+  lb.querySelector('.close').addEventListener('click', close);
+  lb.querySelector('.prev').addEventListener('click', function (e) { e.stopPropagation(); open(cur - 1); });
+  lb.querySelector('.next').addEventListener('click', function (e) { e.stopPropagation(); open(cur + 1); });
+  document.addEventListener('keydown', function (e) {
+    if (cur < 0) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowRight') open(cur + 1);
+    else if (e.key === 'ArrowLeft') open(cur - 1);
+  });
+  var m = location.hash.match(/view=(\d+)/);
+  if (m) open(parseInt(m[1], 10));
+})();
+</script></body></html>
